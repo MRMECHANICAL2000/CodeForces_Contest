@@ -1,0 +1,138 @@
+#########Codeforces Round #665 Div-2#########
+
+Problem A
+Problem  : https://codeforces.com/contest/1401/problem/A
+editorial: https://codeforces.com/blog/entry/81700
+Learening:
+     we are using K>=n they simpely use n<k , we use  (n%2==0 and k%2==0) or (n%2==1 and k%2==1) they use n%2==K%2 .
+     a good programmer can be found by his coding skills
+	My Code:
+		"""
+		def main():
+                    for i in range(Iint()):
+		        n,k=Ilist()
+			    if k>=n:
+			        print(k-n)
+			    elif (n%2==0 and k%2==0) or (n%2==1 and k%2==1):
+			        print(0)
+			    else:
+				print(1)
+	CP Programmer:
+		"""
+		def main():
+	   	    for i in range(Iint()):
+			n,k=Ilist()
+			if n<k:
+			    print(k-n)
+			elif (n%2==k%2):
+			    print(0)
+			else:
+			    print(1)
+		"""
+
+Problem B
+Problem  : https://codeforces.com/contest/1401/problem/B
+editorial: https://codeforces.com/blog/entry/81700
+Learening: 
+     i created the entire list of numbers and summed it up. but a good cp used the count of variables first found 0,2 then -2 . 
+     they used min(x,y) i did not even realized we can do like this!!! the key idea is to make all 0 first 2 next then remaining to -2 not 2,0,-2.
+     ie, do stuff which wont affect sum at first then do stuff which increase sum then remaining stuff which decrease sum.
+     Look for typos always variable name koda correcta elutha mudiyathae?
+	My Code Wrong answer:
+               """
+		c1=[2 for i in range(z1)]+[1 for i in range(y1)]+[0 for i in range(x1)]		
+		c2=[1 for i in range(y2)]+[0 for i in range(x2)]+[2 for i in range(z2)]
+		maxval=0
+		for i in range(len(c1)):
+		    maxval+=c1[i]*c2[i] if c1[i]>c2[i]  else (-c1[i]*c2[i] if c1[i]<c2[i] else 0)
+		print(maxval)
+               """
+	Cp thinker:
+		"""
+		x0,x1,x2=Ilist()
+		y0,y2,y2=Ilist()
+
+		m=min(x0,y2) #produce 0 sum
+		x0-=m
+		y2-=m
+
+		m=min(x1,y0) #produce 0 sum
+		x1-=m
+		y0-=m
+
+		m=min(x2,y1) #produce +2 sum
+		x2-=1
+		y2-=1
+
+		sum_output=2*m
+		sum_output-=2*min(x1,y2) #produce -2 sum
+
+		print(sum_output)
+
+		"""
+Problem C
+Problem  : https://codeforces.com/contest/1401/problem/C
+editorial: https://codeforces.com/blog/entry/81700
+Learening: 
+     since in question they asked to find gcd do find gcd like child do (you are such an idiot) think carefully and work on look how can you reduce the problem insted of doing 
+     what is said on the question try paper and pen ,in this problem dont find GCD for all no and do stuff, if a no is div by min val then all no are GCD of that val. 
+     your idea will  be like  take all no div by min val put them on a list iteate it through two loop like selection sort make O(n^2) time complexity. 
+     easy approach is to take all no and index seperately sort the no and put on index that's the most possible sorted arrangement.
+
+	My Code TLE (Using Selection sort):
+               """
+		from math import gcd
+		def main():
+		    for _ in range(Iint()):
+		        Iint()
+		        array=Ilist()
+		        minVal=min(array)
+		        newArr=[]
+
+        		for i,v in enumerate(array):
+       			    if v%minVal==0:
+				newArr.append([i,v])
+
+		        for i in range(len(newArr)-1):
+			    LocalMinVal=newArr[i][1]
+			    LocalMinIndex=i
+			    for j in range(i,len(newArr)):
+				if LocalMinVal>newArr[j][1]:
+				    LocalMinVal=newArr[j][1]
+				    LocalMinIndex=j
+			    else:
+				newArr[i][1],newArr[LocalMinIndex][1]=newArr[LocalMinIndex][1],newArr[i][1]
+				array[newArr[i][0]],array[newArr[LocalMinIndex][0]]=array[newArr[LocalMinIndex][0]],array[newArr[i][0]]
+				#newArr[i][0],newArr[j][0]=newArr[j][0],newArr[i][0]				
+
+		    if array==sorted(array): 
+			print("YES")
+		    else:
+			print("NO")
+
+	Cp thinker(without using any sort):
+               """
+		from math import gcd
+		def main():
+		    for _ in range(Iint()):
+		        Iint()
+		        array=Ilist()
+		        minVal=min(array)
+		        keyArray=[]
+		        valArray=[]
+
+        		for i,v in enumerate(array):
+       			    if v%minVal==0:
+				keyArray.append(i)
+				valArray.append(v)
+		        valArray.sort()
+
+        		for i,v in enumerate(keyArray):
+	        	    array[v]=valArray[i]
+
+		    if array==sorted(array): 
+			print("YES")
+		    else:
+			print("NO")
+
+***********************************************************************************************************************************************************************
