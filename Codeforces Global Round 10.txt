@@ -1,0 +1,126 @@
+######### Codeforces Global Round 10 #########
+
+Problem A
+Problem  : https://codeforces.com/contest/1392/problem/A
+editorial: https://codeforces.com/blog/entry/81565
+Learening:
+     If your array consists of one number repeated n times, then you obviously can't do any moves to shorten the password. Otherwise, you can show that it is 
+     always possible to shorten the password to 1 number.choose the big no and add no near to until array size become 1 , it is always possible to find a no smaller
+     than the max value near it if the array is not full of single value.if the array is of same element print len(arra) else print 1.always think simply not complicatedly
+     
+	My Code:
+		"""
+			#Wrong Answer code, unable to solve even the most easiest question
+		"""
+	CP Programmer:
+		"""
+			def oamkarPassword(array):
+				array.sort()                        #Easy method to check if entire array is of same element
+				if array[0]==array[-1]:
+					return(len(array))
+				return(1)
+			if __name__ == '__main__':
+			    for _ in range(int(input())):
+				    n=input()
+				    array=[int(i) for i in input().split()]
+				    print(oamkarPassword(array))
+
+		"""
+Problem B
+Problem  : https://codeforces.com/contest/1392/problem/B
+editorial: https://codeforces.com/blog/entry/81565
+Learening:
+     My idea during contest is to find the entire array then return the result. but there is an much easier way to this.just use paper pen do what said in question
+     you will find the pattern within a second. hear if given no "K"(no of time the operation to be repeated) odd means pattern repeat after 3  ,even means pattern
+     repeat after 2.
+
+	My Code:
+		"""
+			#dont think of making entire array alwasy then say result ,Try to find pattern/repetation in the process
+		"""
+	CP Programmer:
+		"""
+			n,k=list(map(int,input().split()))
+			array=[int(i) for i in input().split()]
+			
+			for j in range(2 if k%2==0 else 3):
+				d=max(array)
+				array=[d-i for i in array] 
+			print(*array)
+		"""
+
+
+
+Problem C
+Problem  : https://codeforces.com/contest/1392/problem/C
+editorial: https://codeforces.com/blog/entry/81565
+Learening:
+     This is really simple quetion , the trick is to compare each element from reverese , if cur>prev add their diff to answer , if we look from reverse we can solve
+     the quetion easily since we need last val to be max val , look from reverse increase val with respect to last value . now if we encounter a number cur>prev then
+     we can increase the overall batch we have seen so far in one attempt , if we do the same way from beginning it wont be optimal.
+	My Code:
+		"""
+			#I am using Kadanes algorithm in this question without knowing simple trick to solve this quetsion .key of this question is to look from back
+		"""
+	CP Programmer:
+		"""
+			for _ in range(int(input())):
+				input()
+				array=[int(i) for i in input().split()]
+				ans=0
+				prev=array[-1]
+				for i in array[::-1]:
+					if i>prev:
+						ans+=(i-prev)
+					prev=i
+
+				print(ans)
+		"""
+
+Problem D
+
+Problem  : https://codeforces.com/contest/1392/problem/D
+editorial: https://codeforces.com/blog/entry/81565
+Learening: 
+     If a program says things like rotation dont always think of using circular linked list or double linked list or array rotation.... try approach used in this 
+     question. 1st and last element matching check and remove last elment , then proceed like ordinary array solving. Another thing is when you see comparison stuff
+     then if you loop from 0 to n-1 then we will loose the last element of the array(missing edge case).so just add "$"(anything that wont appear in the array) at
+     the end. Solve this question again and see.
+	My Code Wrong answer:
+               """
+			#Learn those best trick from this question
+               """
+	Cp thinker:
+		"""
+			from math import ceil
+			def main():
+				for _ in range(int(input())):
+					size=int(input())
+					array=list(input())
+					ans=0
+
+					count=0
+					while len(array) and array[0]==array[-1]:
+						count+=1
+						array.pop()
+					if len(array)==0:
+						if count<=2:
+							print(0)
+						else:
+							print((count+2)//3)
+						continue
+					array.append("$")
+					for i in range(len(array)-1):
+						count+=1
+						if array[i]!=array[i+1]:
+							ans+=count//3
+							count=0
+					print(ans)
+
+
+			if __name__ == '__main__':
+				main()
+
+		"""
+
+***********************************************************************************************************************************************************************
